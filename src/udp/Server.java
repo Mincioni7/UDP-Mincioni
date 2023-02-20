@@ -36,6 +36,8 @@ public class Server {
             } catch (IOException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
+            String ricevuto = new String(receivePacket.getData());
+            int numCaratteri = receivePacket.getLength();
         }
         
     }
