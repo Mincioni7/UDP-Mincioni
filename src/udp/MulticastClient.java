@@ -35,9 +35,12 @@ public class MulticastClient {
             byte[] bufferIN = new byte[1024];
             BufferedReader input = new BufferedReader(new InputStreamReader (System.in));
             
+            
+            
             DatagramSocket clientSocket;
             clientSocket = new DatagramSocket();
-        
+            
+            /*
             System.out.println("Client pronto - inserisci un dato da inviare:");
             
             String daSpedire = input.readLine();
@@ -47,14 +50,21 @@ public class MulticastClient {
             clientSocket.send(sendPacket);
             
             DatagramPacket receivePacket = new DatagramPacket(bufferIN, bufferIN.length);
-            clientSocket.receive(receivePacket);
-            String ricevuto = new String(receivePacket.getData());
+            clientSocket.receive(receivePacket);*/
             
-            int numCaratteri = receivePacket.getLength();
+            DatagramPacket inPacket = new DatagramPacket(bufferIN, bufferIN.length);
+            clientSocket.receive(inPacket);
+            
+            String ricevuto = new String(inPacket.getData());
+            
+            int numCaratteri = inPacket.getLength();
             ricevuto=ricevuto.substring(0,numCaratteri);
             System.out.println("dal SERVER:" + ricevuto);
             
             clientSocket.close();
+            
+            
+            
         } catch (UnknownHostException ex) {
             Logger.getLogger(MulticastClient.class.getName()).log(Level.SEVERE, null, ex);
         }
